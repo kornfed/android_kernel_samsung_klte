@@ -31,7 +31,7 @@
 #include <linux/of_gpio.h>
 #include <linux/regulator/consumer.h>
 #include <linux/qpnp/pin.h>
-#include <linux/wake_funcs.h>
+
 
 #define DRIVER_NAME "synaptics_rmi4_i2c"
 
@@ -45,9 +45,6 @@ void screenwake_setdev(struct qpnp_pon * pon)
 {
 	screenwake_pwrdev = pon;
 }
-
-int SYN_I2C_RETRY_TIMES = 10;
-int GPIO_CFG_KT = GPIO_CFG_2MA;
 
 struct qpnp_pin_cfg synaptics_int_set[] = {
 	{
@@ -90,7 +87,6 @@ static int synaptics_rmi4_stop_device(struct synaptics_rmi4_data *rmi4_data);
 static int synaptics_rmi4_start_device(struct synaptics_rmi4_data *rmi4_data);
 static int synaptics_rmi4_init_exp_fn(struct synaptics_rmi4_data *rmi4_data);
 static void synaptics_rmi4_remove_exp_fn(struct synaptics_rmi4_data *rmi4_data);
-bool screen_is_off = false;
 
 #ifdef CONFIG_HAS_EARLYSUSPEND
 static ssize_t synaptics_rmi4_full_pm_cycle_show(struct device *dev,
@@ -233,6 +229,7 @@ static struct device_attribute attrs[] = {
 };
 
 static struct synaptics_rmi4_data *grmi4_data; //grmi4_data->input_dev
+#include <linux/wake_funcs.h>
 static bool kt_screen_trigger = true;
 
 #ifdef READ_LCD_ID

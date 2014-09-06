@@ -9,9 +9,6 @@
 #include "../../drivers/sensorhub/stm/ssp.h"
 //#include <linux/cpufreq_kt.h>
 
-extern int SYN_I2C_RETRY_TIMES;
-extern int GPIO_CFG_KT;
-
 struct qpnp_pon {
 	struct spmi_device *spmi;
 	struct input_dev *pon_input;
