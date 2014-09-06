@@ -3019,7 +3019,7 @@ void __init msm_8974_init_gpiomux(void)
 #endif
 
 	msm_gpiomux_install(hw_rev_configs, ARRAY_SIZE(hw_rev_configs));
-        if (model_type == 1 || model_type == 2)
+	if (model_type == 1)
 	{
 		pr_alert("LOADED SPRINT VARIANT nc_configs.");
 		msm_gpiomux_install(gpio_nc_configs_spr, ARRAY_SIZE(gpio_nc_configs_spr));
