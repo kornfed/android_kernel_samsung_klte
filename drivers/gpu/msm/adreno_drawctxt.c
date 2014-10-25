@@ -271,11 +271,11 @@ static void global_wait_callback(struct kgsl_device *device, void *priv, u32 id,
 }
 
 static int _check_global_timestamp(struct kgsl_device *device,
-	struct adreno_context *drawctxt, unsigned int timestamp)
+		struct adreno_context *drawctxt, unsigned int timestamp)
 {
 	/* Stop waiting if the context is invalidated */
 	if (drawctxt->state == ADRENO_CONTEXT_STATE_INVALID)
-	 return 1;
+		return 1;
 
 	return kgsl_check_timestamp(device, NULL, timestamp);
 }
@@ -295,6 +295,7 @@ int adreno_drawctxt_wait_global(struct adreno_device *adreno_dev,
 		ret = -EINVAL;
 		goto done;
 	}
+
 	/*
 	 * If the context is invalid then return immediately - we may end up
 	 * waiting for a timestamp that will never come
@@ -303,6 +304,7 @@ int adreno_drawctxt_wait_global(struct adreno_device *adreno_dev,
 		kgsl_context_put(context);
 		goto done;
 	}
+
 	trace_adreno_drawctxt_wait_start(KGSL_MEMSTORE_GLOBAL, timestamp);
 
 	ret = kgsl_add_event(device, KGSL_MEMSTORE_GLOBAL, timestamp,
@@ -316,7 +318,7 @@ int adreno_drawctxt_wait_global(struct adreno_device *adreno_dev,
 
 	if (timeout) {
 		ret = (int) wait_event_timeout(drawctxt->waiting,
-		_check_global_timestamp(device, drawctxt, timestamp),
+			_check_global_timestamp(device, drawctxt, timestamp),
 			msecs_to_jiffies(timeout));
 
 		if (ret == 0)
@@ -325,7 +327,7 @@ int adreno_drawctxt_wait_global(struct adreno_device *adreno_dev,
 			ret = 0;
 	} else {
 		wait_event(drawctxt->waiting,
-		_check_global_timestamp(device, drawctxt, timestamp));
+			_check_global_timestamp(device, drawctxt, timestamp));
 	}
 
 	mutex_lock(&device->mutex);
