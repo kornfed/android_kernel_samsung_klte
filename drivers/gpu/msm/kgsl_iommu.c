@@ -514,9 +514,6 @@ static void kgsl_iommu_clk_disable_event(struct kgsl_device *device, void *data,
 	else
 		/* something went wrong with the event handling mechanism */
 		BUG_ON(1);
-
-	/* Free param we are done using it*/
-	kfree(param);
 }
 
 /*
@@ -1978,7 +1975,6 @@ static int kgsl_iommu_default_setstate(struct kgsl_mmu *mmu,
 	phys_addr_t pt_val;
 
 	ret = kgsl_iommu_enable_clk(mmu, KGSL_IOMMU_CONTEXT_USER);
-
 	if (ret) {
 		KGSL_DRV_ERR(mmu->device, "Failed to enable iommu clocks\n");
 		return ret;
