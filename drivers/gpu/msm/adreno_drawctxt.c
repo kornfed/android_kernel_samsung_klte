@@ -622,11 +622,10 @@ int adreno_context_restore(struct adreno_device *adreno_dev,
 	cmds[4] = context->base.id;
 	/* Flush the UCHE for new context */
 	cmds[5] = cp_type0_packet(
-			adreno_getreg(adreno_dev, ADRENO_REG_UCHE_INVALIDATE0), 2);
+		adreno_getreg(adreno_dev, ADRENO_REG_UCHE_INVALIDATE0), 2);
 	cmds[6] = 0;
 	if (adreno_is_a3xx(adreno_dev))
 		cmds[7] = 0x90000000;
-
 	return adreno_ringbuffer_issuecmds(device, context,
 				KGSL_CMD_FLAGS_NONE, cmds, 8);
 }
