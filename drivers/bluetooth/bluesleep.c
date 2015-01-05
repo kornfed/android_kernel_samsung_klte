@@ -495,7 +495,6 @@ static int bluesleep_write_proc_lpm(struct file *file, const char *buffer,
 	if (b == '0') {
 		BT_ERR("(bluesleep_write_proc_lpm) Unreg HCI notifier.");
 		/* HCI_DEV_UNREG */
-		bt_enabled = false;
 		bluesleep_stop();
 		bt_enabled = false;
 		//bsi->uport = NULL;
@@ -925,7 +924,7 @@ static int __init bluesleep_init(void)
 
 	BT_INFO("BlueSleep Mode Driver Ver %s", VERSION);
 
-	bt_enabled = true;
+	bt_enabled = false;
 
 	retval = platform_driver_register(&bluesleep_driver);
 
