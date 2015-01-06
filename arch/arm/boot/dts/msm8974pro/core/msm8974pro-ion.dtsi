@@ -27,8 +27,7 @@
 			qcom,memory-fixed = <0x08000000 0x5100000>;
 			qcom,ion-heap-type = "CARVEOUT";
 		};
-
-		qcom,ion-heap@30 { /* CAMERA HEAP */
+		qcom,ion-heap@30 { /* JUST FOR TEST */
 			compatible = "qcom,msm-ion-reserve";
 			reg = <30>;
 			qcom,heap-align = <0x1000>;
